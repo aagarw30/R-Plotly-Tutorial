@@ -8,8 +8,8 @@ library(dplyr) # data manipulation, Pipe operator
 library(crosstalk) # Shared Data Object, linking
 
 ## Linked Scatter Charts using mtcars dataset
-## Visualize relation between mpg, hp, and wt for a given data point
-## 'mpg vs hp' & 'mpg vs wt' scatter plots
+## Visualize relation between mpg, hp, disp and wt for a given data point
+## 'mpg vs hp' & 'disp vs wt' scatter plots
 ## Selecting data point on scatter plot highlights same data point on second scatter plot
 
 
@@ -24,7 +24,7 @@ p1 = shared_mtcars %>%
 
 # Step:3 Creating the second scatter chart but using the shared data object created in step 1
 p2 = shared_mtcars %>% 
-  plot_ly(x=~mpg, y=~wt) %>% 
+  plot_ly(x=~disp, y=~wt) %>% 
   add_markers()
 
 # Step :4 add both the plots side by side in a row using subplot
@@ -33,3 +33,4 @@ subplot(p1, p2, titleX = TRUE, titleY = TRUE) %>%
   highlight(on="plotly_hover", off = "plotly_doubleclick")
 
 ## highlight 'on' options : plotly_click, plotly_hover, plotly_selected
+## highlight 'off' options : plotly_deselect, plotly_doubleclick

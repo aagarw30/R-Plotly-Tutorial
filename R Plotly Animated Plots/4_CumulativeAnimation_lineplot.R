@@ -1,3 +1,4 @@
+## Demo Cumalative line chart
 library(gapminder) # for gapminder dataset
 library(plotly) # for plotly charts
 library(dplyr)
@@ -6,7 +7,7 @@ library(purrr)
 # Step: 1 Data Split - Chunk the data by year into separate dataframes
 # One dataframe to multiple data frame
 gapminder %>% 
-  filter(country=="Afganistan") %>% 
+  filter(country=="India") %>% 
   select(year, lifeExp) %>% 
   split(.$year) 
 
@@ -14,14 +15,14 @@ gapminder %>%
 # Recursively rbind the data frames
 # Single Country
 gapminder %>% 
-  filter(country=="Kuwait") %>% 
+  filter(country=="India") %>% 
   select(year, lifeExp) %>%
   split(.$year) %>%
   accumulate(~bind_rows(.x, .y)) %>%
   bind_rows(.id="frame") %>%
   plot_ly(x=~year, y=~lifeExp) %>% 
-  # add_trace(frame=~frame, showlegend=FALSE, mode='lines')
-  add_lines(frame=~frame) 
+  add_trace(frame=~frame, showlegend=FALSE, mode='lines+markers')
+  # add_lines(frame=~frame) 
 
   # add_markers(frame=~frame)
 # add_markers(frame=~frame, showlegend=FALSE)
